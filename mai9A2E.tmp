@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://bylfmehhedd51"]
+
+[ext_resource type="PackedScene" uid="uid://knwclft7rygx" path="res://wall.tscn" id="1_w1wyn"]
+[ext_resource type="PackedScene" uid="uid://btbhhs5nbl2ls" path="res://fruit.tscn" id="2_6wku7"]
+[ext_resource type="Script" path="res://dropper.gd" id="3_n5jpi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t3y8x"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="walls" type="Node" parent="."]
+
+[node name="wall" parent="walls" instance=ExtResource("1_w1wyn")]
+position = Vector2(-220, 16)
+scale = Vector2(2, 30)
+
+[node name="wall3" parent="walls" instance=ExtResource("1_w1wyn")]
+position = Vector2(220, 16)
+scale = Vector2(2, 30)
+
+[node name="wall2" parent="walls" instance=ExtResource("1_w1wyn")]
+position = Vector2(0, 296)
+scale = Vector2(20, 2)
+
+[node name="fruit" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-533, -286)
+freeze = true
+
+[node name="fruit2" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-474, -285)
+freeze = true
+level = 2
+
+[node name="fruit3" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-409, -283)
+freeze = true
+level = 3
+
+[node name="fruit4" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-327, -281)
+freeze = true
+level = 4
+
+[node name="fruit5" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-344, -179)
+freeze = true
+level = 5
+
+[node name="fruit6" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-488, -189)
+freeze = true
+level = 6
+
+[node name="fruit7" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-330, -32)
+freeze = true
+level = 7
+
+[node name="fruit8" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-471, -4)
+freeze = true
+level = 8
+
+[node name="fruit9" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(-372, 204)
+freeze = true
+level = 9
+
+[node name="fruit10" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(407, -137)
+freeze = true
+level = 10
+
+[node name="fruit11" parent="." instance=ExtResource("2_6wku7")]
+position = Vector2(417, 179)
+freeze = true
+level = 11
+
+[node name="dropper" type="Node" parent="."]
+script = ExtResource("3_n5jpi")
+
+[node name="fruit_cursor" type="MeshInstance2D" parent="dropper"]
+scale = Vector2(20, 20)
+mesh = SubResource("SphereMesh_t3y8x")
