@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var cursor : Node2D = $fruit_cursor
+@onready var score : Score = $"../ui/score"
+
 var level := 1
 const prefab := preload("res://fruit.tscn")
 var original_size : Vector2
@@ -11,6 +13,7 @@ func _ready():
 	original_size = cursor.scale
 
 func make_fruit():
+	score.end_combo()
 	var fruit := prefab.instantiate()
 	$"..".add_child(fruit)
 	fruit.global_position = cursor.global_position

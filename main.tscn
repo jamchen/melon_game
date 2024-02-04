@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bylfmehhedd51"]
+[gd_scene load_steps=15 format=3 uid="uid://bylfmehhedd51"]
 
 [ext_resource type="PackedScene" uid="uid://knwclft7rygx" path="res://wall.tscn" id="1_w1wyn"]
 [ext_resource type="PackedScene" uid="uid://bbklr6uje06n" path="res://kill_plane.tscn" id="2_sj07l"]
 [ext_resource type="Script" path="res://dropper.gd" id="3_n5jpi"]
 [ext_resource type="Script" path="res://fruit.gd" id="4_d0nrp"]
+[ext_resource type="Script" path="res://score.gd" id="5_ttot6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efixp"]
 
@@ -20,6 +21,14 @@ friction = 0.1
 bounce = 0.15
 
 [sub_resource type="SphereMesh" id="SphereMesh_t5nl4"]
+
+[sub_resource type="SystemFont" id="SystemFont_ufdem"]
+resource_local_to_scene = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_pf3cd"]
+font = SubResource("SystemFont_ufdem")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D"]
 
@@ -269,3 +278,18 @@ colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784
 [node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit11"]
 scale = Vector2(20, 20)
 mesh = SubResource("SphereMesh_t5nl4")
+
+[node name="ui" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="score" type="Label" parent="ui"]
+offset_left = 59.0
+offset_top = 273.0
+offset_right = 232.0
+offset_bottom = 318.0
+text = "score: 1000"
+label_settings = SubResource("LabelSettings_pf3cd")
+horizontal_alignment = 2
+vertical_alignment = 1
+justification_flags = 0
+script = ExtResource("5_ttot6")

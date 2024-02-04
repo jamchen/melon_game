@@ -48,7 +48,7 @@ static func get_target_mass(level_: int) -> float:
 	return pow(2.0, level_ - 1)
 
 func _ready():
-	if colors != baked_colors:
+	if false and colors != baked_colors:
 		print("[")
 		for c in colors: 
 			print("\t\tColor", c, ",")
@@ -99,6 +99,8 @@ func do_combining(delta: float):
 		apply_impulse(-(node.global_position - global_position) * mass * 2)
 		cooldown = 0.1
 		level += 1
+		var score : Score = $"../ui/score"
+		score.add(level)
 		if level >= 12:
 			level = 11
 			cooldown = 1000
