@@ -14,7 +14,7 @@ func make_fruit():
 	$"..".add_child(fruit)
 	fruit.global_position = cursor.global_position
 	fruit.level = level
-	fruit.linear_velocity.y = 200.0
+	fruit.linear_velocity.y = 400.0
 	fruit.angular_velocity = randf_range(-1, 1)
 	level = randi_range(1, 5)
 	cooldown = 0.2
@@ -31,7 +31,7 @@ func _process(delta):
 	
 	cursor.modulate = lerp(cursor.modulate, Fruit.get_color(level), t)
 	
-	if Input.is_key_pressed(KEY_I):
+	if Input.is_key_pressed(KEY_I) and cooldown < 0.1:
 		make_fruit()
 
 func _input(event):

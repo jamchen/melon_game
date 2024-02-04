@@ -9,10 +9,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	for body in get_overlapping_bodies():
-		if body is Fruit and not body.freeze and body.lifetime > 0.2:
+		if body is Fruit and not body.freeze and body.in_game:
 			get_tree().reload_current_scene()
 
 
 func _on_body_entered(body):
-	if body is Fruit and not body.freeze and body.lifetime > 0.2:
+	if body is Fruit and not body.freeze and body.in_game:
 		get_tree().reload_current_scene()
