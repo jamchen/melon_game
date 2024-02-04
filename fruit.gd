@@ -11,7 +11,19 @@ var absorber : Fruit
 var in_game := false
 
 @export var colors : Array[Color]
-
+const baked_colors := [
+		Color(0.9725, 0, 0.2471, 1),
+		Color(0.9608, 0.4157, 0.2824, 1),
+		Color(0.6039, 0.3922, 0.9804, 1),
+		Color(0.9804, 0.698, 0.0157, 1),
+		Color(0.9725, 0.5176, 0.0706, 1),
+		Color(0.9412, 0.3765, 0.302, 1),
+		Color(0.9725, 0.9294, 0.4588, 1),
+		Color(0.9765, 0.7765, 0.7333, 1),
+		Color(0.949, 0.8118, 0.0118, 1),
+		Color(0.6, 0.8471, 0.0588, 1),
+		Color(0.0784, 0.5686, 0.0314, 1),
+	]
 
 
 static func get_target_scale(level_: int) -> float:
@@ -30,24 +42,17 @@ static func get_target_scale(level_: int) -> float:
 		][level_ - 1]
 
 static func get_color(level_: int) -> Color:
-	return [
-		Color(0.9098, 0.0078, 0.0314, 1),
-		Color(0.9608, 0.4157, 0.2824, 1),
-		Color(0.6039, 0.3922, 0.9804, 1),
-		Color(0.9804, 0.698, 0.0157, 1),
-		Color(0.9725, 0.5176, 0.0706, 1),
-		Color(0.9333, 0.0667, 0.0627, 1),
-		Color(0.9725, 0.9294, 0.4588, 1),
-		Color(0.9765, 0.7765, 0.7333, 1),
-		Color(0.949, 0.8118, 0.0118, 1),
-		Color(0.6, 0.8471, 0.0588, 1),
-		Color(0.0784, 0.5686, 0.0314, 1)
-	][level_ - 1]
+	return baked_colors[level_ - 1]
 
 static func get_target_mass(level_: int) -> float:
 	return pow(2.0, level_ - 1)
 
 func _ready():
+	if colors != baked_colors:
+		print("[")
+		for c in colors: 
+			print("\t\tColor", c, ",")
+		print("\t]")
 	contact_monitor = true
 	max_contacts_reported = 50
 
