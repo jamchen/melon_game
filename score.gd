@@ -7,6 +7,10 @@ var score := 0
 func _ready():
 	text = ""
 
+func level_start():
+	$"../prev_score".text = text
+	text = ""
+
 func end_combo():
 	combo_counter = 1
 

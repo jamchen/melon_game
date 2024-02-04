@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var cursor : Node2D = $fruit_cursor
-@onready var score : Score = $"../ui/score"
+@onready var score : Score = $"/root/ui/score"
 
 var level := 1
 const prefab := preload("res://fruit.tscn")
@@ -11,6 +11,7 @@ const border_const := 203
 
 func _ready():
 	original_size = cursor.scale
+	score.level_start()
 
 func make_fruit():
 	score.end_combo()
