@@ -14,7 +14,7 @@ config/name="MelooniPeli"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
-config/build_datetime="2024-02-04T17:19:18"
+config/build_datetime="2024-02-04T17:21:41"
 
 [autoload]
 
