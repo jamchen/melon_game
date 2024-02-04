@@ -8,6 +8,7 @@ var cooldown := 0.1
 @onready var mesh := $MeshInstance2D
 @onready var collider := $CollisionShape2D
 var absorber : Fruit
+var lifetime := 0.0
 
 @export var colors : Array[Color]
 
@@ -57,6 +58,8 @@ func get_absorbed(other: Fruit):
 	mesh.global_position = global_position
 
 func _process(delta: float):
+	lifetime += delta
+
 	var t := 1.0 - pow(0.0001, delta)
 	mesh.modulate = lerp(mesh.modulate, get_color(level), t)
 	current_mass = get_target_mass(level)
