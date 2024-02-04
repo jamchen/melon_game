@@ -14,7 +14,7 @@ var in_game := false
 
 
 
-static func get_target_scale(level: int) -> float:
+static func get_target_scale(level_: int) -> float:
 	return [
 		1, # red
 		1.5, # pink
@@ -27,9 +27,9 @@ static func get_target_scale(level: int) -> float:
 		11, # yellow
 		13, # pale green
 		15 # green
-		][level - 1]
+		][level_ - 1]
 
-static func get_color(level: int) -> Color:
+static func get_color(level_: int) -> Color:
 	return [
 		Color(0.9098, 0.0078, 0.0314, 1),
 		Color(0.9608, 0.4157, 0.2824, 1),
@@ -42,10 +42,10 @@ static func get_color(level: int) -> Color:
 		Color(0.949, 0.8118, 0.0118, 1),
 		Color(0.6, 0.8471, 0.0588, 1),
 		Color(0.0784, 0.5686, 0.0314, 1)
-	][level - 1]
+	][level_ - 1]
 
-static func get_target_mass(level: int) -> float:
-	return pow(2.0, level - 1)
+static func get_target_mass(level_: int) -> float:
+	return pow(2.0, level_ - 1)
 
 func _ready():
 	contact_monitor = true
@@ -59,8 +59,8 @@ func get_absorbed(other: Fruit):
 
 func _process(delta: float):
 	var t := 1.0 - pow(0.0001, delta)
-	mesh.modulate = lerp(mesh.modulate, get_color(level), t)
-	current_mass = get_target_mass(level)
+	mesh.modulate = lerp(mesh.modulate, Fruit.get_color(level), t)
+	current_mass = Fruit.get_target_mass(level)
 
 	if absorber:
 		if is_instance_valid(absorber) and absorber.cooldown > 0:
@@ -110,7 +110,7 @@ func _physics_process(delta: float):
 
 	var t := 1.0 - pow(0.0001, delta)
 	mass = lerp(mass, current_mass, t)
-	var target_scale := Vector2(1,1) * get_target_scale(level)
+	var target_scale := Vector2(1,1) * Fruit.get_target_scale(level)
 	var prev_scale = current_scale
 	current_scale = lerp(current_scale, target_scale, t)
 	_scale_2d(current_scale / prev_scale)
