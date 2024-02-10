@@ -3,12 +3,12 @@ class_name Fruit
 
 export var level := 1
 var current_scale := Vector2(1,1)
-var current_mass := 1.0
 var cooldown := 0.1
 onready var mesh := $MeshInstance2D
 onready var collider := $CollisionShape2D
 var absorber
 var in_game := false
+var popped := false
 
 const baked_colors := [
 		Color(0.9725, 0, 0.2471, 1),
@@ -58,7 +58,6 @@ func _ready():
 	
 	mesh.modulate = get_color(level)
 	mass = get_target_mass(level)
-	current_mass = get_target_mass(level)
 	var target_scale := Vector2(1,1) * get_target_scale(level)
 	var prev_scale = current_scale
 	current_scale = target_scale
@@ -74,7 +73,6 @@ func get_absorbed(other):
 func _process(delta: float):
 	var t := 1.0 - pow(0.0001, delta)
 	mesh.modulate = lerp(mesh.modulate, get_color(level), t)
-	current_mass = get_target_mass(level)
 
 	if absorber:
 		if is_instance_valid(absorber) and absorber.cooldown > 0:
@@ -125,8 +123,8 @@ func _physics_process(delta: float):
 	do_combining(delta)
 
 	var t := 1.0 - pow(0.0001, delta)
-	mass = lerp(mass, current_mass, t)
-	var target_scale := Vector2(1,1) * get_target_scale(level)
+	mass = lerp(mass, get_target_mass(level), t)
+	var target_scale := Vector2(1,1) * (get_target_scale(level) if not popped else 0.0)
 	var prev_scale = current_scale
 	current_scale = lerp(current_scale, target_scale, t)
 	_scale_2d(current_scale / prev_scale)
@@ -138,3 +136,6 @@ func _scale_2d(target_scale: Vector2):
 		if child is Node2D:
 			child.scale *= target_scale
 			child.transform.origin *= target_scale
+
+func pop():
+	popped = true
