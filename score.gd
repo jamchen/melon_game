@@ -6,7 +6,6 @@ var score := 0
 
 func _ready():
 	text = ""
-	print("_READY!")
 
 func level_start():
 	$"../prev_score".text = text
