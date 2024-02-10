@@ -21,14 +21,14 @@ position = Vector2( -220, 27 )
 scale = Vector2( 1.852, 25 )
 
 [node name="wall_left_ext" type="StaticBody2D" parent="walls"]
-position = Vector2( -340, 166 )
+position = Vector2( -338, 201 )
 scale = Vector2( 10, 38.76 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/wall_left_ext"]
 shape = SubResource( 1 )
 
 [node name="wall_right_ext" type="StaticBody2D" parent="walls"]
-position = Vector2( 337, 166 )
+position = Vector2( 337, 201 )
 scale = Vector2( 10, 38.76 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/wall_right_ext"]
@@ -58,6 +58,14 @@ scale = Vector2( 10000, 40 )
 
 [node name="kill_plane4" parent="walls" instance=ExtResource( 2 )]
 position = Vector2( -400, -270.055 )
+scale = Vector2( 10, 10 )
+
+[node name="kill_plane6" parent="walls" instance=ExtResource( 2 )]
+position = Vector2( -350, -92 )
+scale = Vector2( 10, 10 )
+
+[node name="kill_plane7" parent="walls" instance=ExtResource( 2 )]
+position = Vector2( 350, -94 )
 scale = Vector2( 10, 10 )
 
 [node name="kill_plane5" parent="walls" instance=ExtResource( 2 )]
