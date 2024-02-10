@@ -69,6 +69,7 @@ func game_over():
 	is_game_over = true
 	ending_over = false
 	ending_cooldown = 1.0
+	score.game_over()
 
 func do_ending(delta: float):
 	ending_cooldown -= delta
