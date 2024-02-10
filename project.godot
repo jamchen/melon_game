@@ -6,35 +6,58 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=5
+config_version=4
+
+_global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Fruit",
+"language": "GDScript",
+"path": "res://fruit.gd"
+}, {
+"base": "Label",
+"class": "Score",
+"language": "GDScript",
+"path": "res://score.gd"
+} ]
+_global_script_class_icons={
+"Fruit": "",
+"Score": ""
+}
 
 [application]
 
-config/name="MelooniPeli"
+config/name="Melooni Peli 3"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
-config/build_datetime="2024-02-07T22:02:49"
+config/icon="res://icon.png"
+config/features=PoolStringArray( "3.6" )
+config/build_datetime="2024-02-10T13:38:15"
 
 [autoload]
 
 buildtime_printer="*res://buildtime_printer.gd"
-ui="*res://ui.tscn"
 
 [display]
 
-window/size/viewport_width=500
-window/stretch/mode="canvas_items"
+window/size/width=500
+window/size/height=648
+window/energy_saving/keep_screen_on=false
+window/handheld/orientation="portrait"
+window/stretch/mode="2d"
 window/stretch/aspect="expand"
-window/handheld/orientation=1
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+2d/default_gravity=980
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
-textures/vram_compression/import_etc2_astc=true
-shader_compiler/shader_cache/strip_debug=true
-textures/default_filters/anisotropic_filtering_level=0
-anti_aliasing/screen_space_roughness_limiter/enabled=false
-environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 1)
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+quality/filters/use_fxaa=true
+environment/default_environment="res://default_env.tres"

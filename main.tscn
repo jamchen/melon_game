@@ -1,276 +1,78 @@
-[gd_scene load_steps=13 format=3 uid="uid://bylfmehhedd51"]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource type="PackedScene" uid="uid://knwclft7rygx" path="res://wall.tscn" id="1_w1wyn"]
-[ext_resource type="PackedScene" uid="uid://bbklr6uje06n" path="res://kill_plane.tscn" id="2_sj07l"]
-[ext_resource type="Script" path="res://dropper.gd" id="3_n5jpi"]
-[ext_resource type="Script" path="res://fruit.gd" id="4_d0nrp"]
+[ext_resource path="res://wall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://kill_plane.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dropper.gd" type="Script" id=3]
+[ext_resource path="res://ui.tscn" type="PackedScene" id=4]
+[ext_resource path="res://white.png" type="Texture" id=5]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_efixp"]
+[sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hi5v3"]
-albedo_color = Color(0.968627, 0.67451, 0.321569, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_c7hof"]
-material = SubResource("StandardMaterial3D_hi5v3")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjotd"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_wp6md"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_t3y8x"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ifn83"]
-friction = 0.1
-bounce = 0.15
-
-[sub_resource type="SphereMesh" id="SphereMesh_t5nl4"]
+[sub_resource type="SphereMesh" id=2]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
 
 [node name="walls" type="Node" parent="."]
 
-[node name="wall_left" parent="walls" instance=ExtResource("1_w1wyn")]
-position = Vector2(-220, 27)
-scale = Vector2(1.852, 25)
+[node name="wall_left" parent="walls" instance=ExtResource( 1 )]
+position = Vector2( -220, 27 )
+scale = Vector2( 1.852, 25 )
 
 [node name="wall_left_ext" type="StaticBody2D" parent="walls"]
-position = Vector2(-340, 166)
-scale = Vector2(10, 38.76)
+position = Vector2( -340, 166 )
+scale = Vector2( 10, 38.76 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/wall_left_ext"]
-position = Vector2(0.3, 0)
-shape = SubResource("RectangleShape2D_efixp")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="walls/wall_left_ext"]
-visible = false
-scale = Vector2(20, 20)
-mesh = SubResource("BoxMesh_c7hof")
+shape = SubResource( 1 )
 
 [node name="wall_right_ext" type="StaticBody2D" parent="walls"]
-position = Vector2(337, 166)
-scale = Vector2(10, 38.76)
+position = Vector2( 337, 166 )
+scale = Vector2( 10, 38.76 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/wall_right_ext"]
-shape = SubResource("RectangleShape2D_efixp")
+shape = SubResource( 1 )
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="walls/wall_right_ext"]
-visible = false
-scale = Vector2(20, 20)
-mesh = SubResource("BoxMesh_c7hof")
-
-[node name="wall_right" parent="walls" instance=ExtResource("1_w1wyn")]
-position = Vector2(220, 27)
-scale = Vector2(1.852, 25)
+[node name="wall_right" parent="walls" instance=ExtResource( 1 )]
+position = Vector2( 220, 27 )
+scale = Vector2( 1.852, 25 )
 
 [node name="floor" type="StaticBody2D" parent="walls"]
-position = Vector2(0, 296)
-scale = Vector2(23.85, 2)
+position = Vector2( 0, 296 )
+scale = Vector2( 23.85, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/floor"]
-position = Vector2(0, 90)
-scale = Vector2(1, 10)
-shape = SubResource("RectangleShape2D_sjotd")
+position = Vector2( 0, 90 )
+scale = Vector2( 1, 10 )
+shape = SubResource( 1 )
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="walls/floor"]
-modulate = Color(0.780392, 0.537255, 0.372549, 1)
-scale = Vector2(20, 20)
-mesh = SubResource("BoxMesh_wp6md")
+[node name="Sprite" type="Sprite" parent="walls/floor"]
+modulate = Color( 0.780392, 0.537255, 0.372549, 1 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 5 )
 
-[node name="kill_plane3" parent="walls" instance=ExtResource("2_sj07l")]
-position = Vector2(0, 1080)
-scale = Vector2(10000, 40)
+[node name="kill_plane3" parent="walls" instance=ExtResource( 2 )]
+position = Vector2( 0, 1080 )
+scale = Vector2( 10000, 40 )
 
-[node name="kill_plane4" parent="walls" instance=ExtResource("2_sj07l")]
-position = Vector2(-400, -270.055)
-scale = Vector2(10, 10)
+[node name="kill_plane4" parent="walls" instance=ExtResource( 2 )]
+position = Vector2( -400, -270.055 )
+scale = Vector2( 10, 10 )
 
-[node name="kill_plane5" parent="walls" instance=ExtResource("2_sj07l")]
-position = Vector2(400, -270.055)
-scale = Vector2(10, 10)
+[node name="kill_plane5" parent="walls" instance=ExtResource( 2 )]
+position = Vector2( 400, -270.055 )
+scale = Vector2( 10, 10 )
 
 [node name="dropper" type="Node2D" parent="."]
-position = Vector2(0, -296)
-script = ExtResource("3_n5jpi")
+position = Vector2( 0, -296 )
+script = ExtResource( 3 )
 
 [node name="fruit_cursor" type="MeshInstance2D" parent="dropper"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t3y8x")
+scale = Vector2( 10, 10 )
+mesh = SubResource( 2 )
 
-[node name="deco" type="Node2D" parent="."]
+[node name="ui" parent="." instance=ExtResource( 4 )]
 
-[node name="fruit" type="RigidBody2D" parent="deco"]
-position = Vector2(-533, -286)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 1
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit2" type="RigidBody2D" parent="deco"]
-position = Vector2(-496, -286)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 2
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit2"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit3" type="RigidBody2D" parent="deco"]
-position = Vector2(-451, -286)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 3
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit3"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit4" type="RigidBody2D" parent="deco"]
-position = Vector2(-396, -285)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 4
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit4"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit5" type="RigidBody2D" parent="deco"]
-position = Vector2(-378, -212)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 5
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit5"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit6" type="RigidBody2D" parent="deco"]
-position = Vector2(-501, -212)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 6
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit6"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit7" type="RigidBody2D" parent="deco"]
-position = Vector2(-399, -98)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 7
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit7"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit8" type="RigidBody2D" parent="deco"]
-position = Vector2(-504, 17)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 8
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit8"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit9" type="RigidBody2D" parent="deco"]
-position = Vector2(-441, 213)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 9
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit9"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit10" type="RigidBody2D" parent="deco"]
-position = Vector2(471, -114)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 10
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit10"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
-
-[node name="fruit11" type="RigidBody2D" parent="deco"]
-position = Vector2(466, 179)
-physics_material_override = SubResource("PhysicsMaterial_ifn83")
-can_sleep = false
-freeze = true
-continuous_cd = 2
-max_contacts_reported = 20
-contact_monitor = true
-script = ExtResource("4_d0nrp")
-level = 11
-colors = Array[Color]([Color(0.909804, 0.00784314, 0.0313726, 1), Color(0.960784, 0.415686, 0.282353, 1), Color(0.603922, 0.392157, 0.980392, 1), Color(0.980392, 0.698039, 0.0156863, 1), Color(0.972549, 0.517647, 0.0705882, 1), Color(0.933333, 0.0666667, 0.0627451, 1), Color(0.972549, 0.929412, 0.458824, 1), Color(0.976471, 0.776471, 0.733333, 1), Color(0.94902, 0.811765, 0.0117647, 1), Color(0.6, 0.847059, 0.0588235, 1), Color(0.0784314, 0.568627, 0.0313726, 1)])
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="deco/fruit11"]
-scale = Vector2(20, 20)
-mesh = SubResource("SphereMesh_t5nl4")
+[editable path="ui"]

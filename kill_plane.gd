@@ -12,5 +12,5 @@ func _process(_delta):
 			get_tree().reload_current_scene()
 
 func _on_body_entered(body):
-	if body is Fruit and not body.freeze and body.in_game:
+	if body is Fruit and body.in_game:
 		restart_queued = true

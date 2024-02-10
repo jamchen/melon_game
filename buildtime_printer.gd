@@ -1,4 +1,4 @@
-@tool
+tool
 extends Node
 
 func _ready():
@@ -10,3 +10,4 @@ func _process(_delta):
 		if ProjectSettings.get_setting("application/config/build_datetime") != t:
 			ProjectSettings.set_setting("application/config/build_datetime", t)
 			ProjectSettings.save()
+			

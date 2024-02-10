@@ -1,16 +1,15 @@
 extends RigidBody2D
 class_name Fruit
 
-@export var level := 1
+export var level := 1
 var current_scale := Vector2(1,1)
 var current_mass := 1.0
 var cooldown := 0.1
-@onready var mesh := $MeshInstance2D
-@onready var collider := $CollisionShape2D
-var absorber : Fruit
+onready var mesh := $MeshInstance2D
+onready var collider := $CollisionShape2D
+var absorber
 var in_game := false
 
-@export var colors : Array[Color]
 const baked_colors := [
 		Color(0.9725, 0, 0.2471, 1),
 		Color(0.9608, 0.4157, 0.2824, 1),
@@ -24,6 +23,7 @@ const baked_colors := [
 		Color(0.6, 0.8471, 0.0588, 1),
 		Color(0.0784, 0.5686, 0.0314, 1),
 	]
+#export var colors := baked_colors
 
 
 static func get_target_scale(level_: int) -> float:
@@ -48,24 +48,33 @@ static func get_target_mass(level_: int) -> float:
 	return pow(2.0, level_ - 1)
 
 func _ready():
-	if false and colors != baked_colors:
-		print("[")
-		for c in colors: 
-			print("\t\tColor", c, ",")
-		print("\t]")
+	#if false and colors != baked_colors:
+	#	print("[")
+	#	for c in colors: 
+	#		print("\t\tColor", c, ",")
+	#	print("\t]")
 	contact_monitor = true
-	max_contacts_reported = 50
+	set_max_contacts_reported(50)
+	
+	mesh.modulate = get_color(level)
+	mass = get_target_mass(level)
+	current_mass = get_target_mass(level)
+	var target_scale := Vector2(1,1) * get_target_scale(level)
+	var prev_scale = current_scale
+	current_scale = target_scale
+	_scale_2d(target_scale)
+	
 
-func get_absorbed(other: Fruit):
+func get_absorbed(other):
 	collider.queue_free()
 	absorber = other
-	mesh.reparent($"..")
+	mesh.owner = $".."
 	mesh.global_position = global_position
 
 func _process(delta: float):
 	var t := 1.0 - pow(0.0001, delta)
-	mesh.modulate = lerp(mesh.modulate, Fruit.get_color(level), t)
-	current_mass = Fruit.get_target_mass(level)
+	mesh.modulate = lerp(mesh.modulate, get_color(level), t)
+	current_mass = get_target_mass(level)
 
 	if absorber:
 		if is_instance_valid(absorber) and absorber.cooldown > 0:
@@ -88,7 +97,7 @@ func do_combining(delta: float):
 
 	for node in get_colliding_bodies():
 		in_game = true
-		if not node is Fruit or node.level != level or node.is_queued_for_deletion():
+		if not node.has_method("get_absorbed") or node.level != level or node.is_queued_for_deletion():
 			continue
 		if node.absorber:
 			continue
@@ -96,10 +105,10 @@ func do_combining(delta: float):
 			continue
 		if node.get_instance_id() < get_instance_id():
 			continue
-		apply_impulse(-(node.global_position - global_position) * mass * 2)
+		apply_central_impulse(-(node.global_position - global_position) * mass * 2)
 		cooldown = 0.1
 		level += 1
-		var score : Score = $"/root/ui/score"
+		var score : Score = $"../ui/score"
 		score.add(level)
 		if level >= 12:
 			level = 11
@@ -117,7 +126,7 @@ func _physics_process(delta: float):
 
 	var t := 1.0 - pow(0.0001, delta)
 	mass = lerp(mass, current_mass, t)
-	var target_scale := Vector2(1,1) * Fruit.get_target_scale(level)
+	var target_scale := Vector2(1,1) * get_target_scale(level)
 	var prev_scale = current_scale
 	current_scale = lerp(current_scale, target_scale, t)
 	_scale_2d(current_scale / prev_scale)
