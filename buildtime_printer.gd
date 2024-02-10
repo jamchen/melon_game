@@ -9,3 +9,4 @@ func _process(_delta):
 		var t := Time.get_datetime_string_from_system()
 		if ProjectSettings.get_setting("application/config/build_datetime") != t:
 			ProjectSettings.set_setting("application/config/build_datetime", t)
+			ProjectSettings.save()

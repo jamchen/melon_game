@@ -30,12 +30,12 @@ config/name="MelooniPeli3"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 config/features=PoolStringArray( "3.6" )
-config/build_datetime="2024-02-10T18:09:47"
+config/build_datetime="2024-02-10T18:48:18"
 
 [autoload]
 
-buildtime_printer="res://buildtime_printer.gd"
 ui="*res://ui.tscn"
+buildtime_printer="*res://buildtime_printer.gd"
 
 [display]
 
@@ -56,6 +56,7 @@ project/assembly_name="MelooniPeli3"
 
 [physics]
 
+common/physics_jitter_fix=0.0
 common/enable_pause_aware_picking=true
 2d/default_gravity=980
 
