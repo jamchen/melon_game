@@ -30,7 +30,7 @@ config/name="MelooniPeli3"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 config/features=PoolStringArray( "3.6" )
-config/build_datetime="2024-02-10T14:35:36"
+config/build_datetime="2024-02-10T14:39:43"
 
 [autoload]
 
@@ -56,7 +56,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
+quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"
