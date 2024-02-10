@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/white.png-d8533361663a5f8fe5200e5b5262a62d.s3tc.stex"
-path.etc="res://.import/white.png-d8533361663a5f8fe5200e5b5262a62d.etc.stex"
+path="res://.import/white.png-d8533361663a5f8fe5200e5b5262a62d.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://white.png"
-dest_files=[ "res://.import/white.png-d8533361663a5f8fe5200e5b5262a62d.s3tc.stex", "res://.import/white.png-d8533361663a5f8fe5200e5b5262a62d.etc.stex" ]
+dest_files=[ "res://.import/white.png-d8533361663a5f8fe5200e5b5262a62d.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
@@ -26,7 +24,7 @@ flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
