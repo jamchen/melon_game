@@ -1,13 +1,13 @@
 extends Node2D
 
 onready var cursor : Node2D = $fruit_cursor
-onready var score : Score = $"../ui/score"
+onready var score : Score = $"/root/ui/score"
 
 var level := 1
 const prefab : PackedScene = preload("res://fruit.tscn")
 const original_size := Vector2(10,10)
 var cooldown := 0.0
-const border_const := 201
+const border_const := 200
 
 func _ready():
 	score.level_start()
@@ -21,9 +21,10 @@ func make_fruit():
 	var border_dist := border_const - Fruit.get_target_scale(level) * original_size.x
 	fruit.global_position.x = clamp(cursor.global_position.x, -border_dist, border_dist)
 	fruit.linear_velocity.y = 400.0
-	fruit.angular_velocity = rand_range(-1, 1)
+	fruit.linear_velocity.x = 0
+	fruit.angular_velocity = rand_range(-0.1, 0.1)
 	level = randi() % 5 + 1
-	cooldown = 0.1 + min(0.2, fruit.level * 0.1)
+	cooldown = 0.1 + min(0.2, level * 0.1)
 
 func _process(delta):
 	cooldown -= delta

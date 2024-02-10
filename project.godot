@@ -30,11 +30,12 @@ config/name="MelooniPeli3"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 config/features=PoolStringArray( "3.6" )
-config/build_datetime="2024-02-10T16:55:13"
+config/build_datetime="2024-02-10T18:09:47"
 
 [autoload]
 
-buildtime_printer="*res://buildtime_printer.gd"
+buildtime_printer="res://buildtime_printer.gd"
+ui="*res://ui.tscn"
 
 [display]
 

@@ -108,7 +108,7 @@ func do_combining(delta: float):
 		apply_central_impulse(-(node.global_position - global_position) * mass * 2)
 		cooldown = 0.1
 		level += 1
-		var score : Score = $"../ui/score"
+		var score : Score = $"/root/ui/score"
 		score.add(level)
 		if level >= 12:
 			level = 11

@@ -22,5 +22,5 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-scale = Vector2( 10, 10 )
+scale = Vector2( 10.3, 10.3 )
 mesh = SubResource( 2 )

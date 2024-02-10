@@ -6,11 +6,13 @@ var score := 0
 
 func _ready():
 	text = ""
+	print("_READY!")
 
 func level_start():
 	$"../prev_score".text = text
 	text = ""
 	score = 0
+	seed(4) # Chosen with a fair dice roll (also the sequence starts with two small fruits)
 
 func end_combo():
 	combo_counter = 1

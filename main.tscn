@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://wall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://kill_plane.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dropper.gd" type="Script" id=3]
-[ext_resource path="res://ui.tscn" type="PackedScene" id=4]
 [ext_resource path="res://white.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -41,7 +40,7 @@ scale = Vector2( 1.852, 25 )
 
 [node name="floor" type="StaticBody2D" parent="walls"]
 position = Vector2( 0, 296 )
-scale = Vector2( 23.85, 2 )
+scale = Vector2( 23.856, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/floor"]
 position = Vector2( 0, 90 )
@@ -72,7 +71,3 @@ script = ExtResource( 3 )
 [node name="fruit_cursor" type="MeshInstance2D" parent="dropper"]
 scale = Vector2( 10, 10 )
 mesh = SubResource( 2 )
-
-[node name="ui" parent="." instance=ExtResource( 4 )]
-
-[editable path="ui"]
