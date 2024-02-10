@@ -41,7 +41,7 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.is_released():
+		if not event.is_pressed():
 			if cooldown <= 0:
 				make_fruit()
 	elif event is InputEventKey:
