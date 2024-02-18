@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pop_med.wav-4036d347e31842edba3d12aa7e89121e.sample"
+
+[deps]
+
+source_file="res://sfx/pop_med.wav"
+dest_files=[ "res://.import/pop_med.wav-4036d347e31842edba3d12aa7e89121e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

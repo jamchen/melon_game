@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://wall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://kill_plane.tscn" type="PackedScene" id=2]
 [ext_resource path="res://dropper.gd" type="Script" id=3]
+[ext_resource path="res://audio.gd" type="Script" id=4]
 [ext_resource path="res://white.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -75,3 +76,6 @@ script = ExtResource( 3 )
 [node name="fruit_cursor" type="MeshInstance2D" parent="dropper"]
 scale = Vector2( 10, 10 )
 mesh = SubResource( 2 )
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 4 )

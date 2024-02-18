@@ -9,9 +9,9 @@ func _process(_delta):
 		return
 
 	for body in get_overlapping_bodies():
-		if body is Fruit and body.in_game:
+		if body is Fruit:
 			dropper.game_over()
 
 func _on_body_entered(body):
-	if body is Fruit and body.in_game:
+	if body is Fruit:
 		restart_queued = true

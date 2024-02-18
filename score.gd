@@ -13,7 +13,6 @@ func level_start():
 	text = ""
 	score = 0
 	is_game_over = false
-	seed(4) # Chosen with a fair dice roll (also the sequence starts with two small fruits)
 
 func end_combo():
 	combo_counter = 1

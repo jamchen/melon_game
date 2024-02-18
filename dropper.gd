@@ -14,7 +14,10 @@ var is_game_over : bool = false
 var ending_over : bool = false
 var ending_cooldown : float = 0.0
 
+var fruit_rng := RandomNumberGenerator.new()
+
 func _ready():
+	fruit_rng.set_seed(4) # Chosen with a fair dice roll (also the sequence starts with two small fruits)
 	score.level_start()
 
 func make_fruit():
@@ -32,8 +35,8 @@ func make_fruit():
 	fruit.global_position.x = clamp(cursor.global_position.x, -border_dist, border_dist)
 	fruit.linear_velocity.y = 400.0
 	fruit.linear_velocity.x = 0
-	fruit.angular_velocity = rand_range(-0.1, 0.1)
-	level = randi() % 5 + 1
+	fruit.angular_velocity = fruit_rng.randf() * 0.2 - 0.1
+	level = fruit_rng.randi() % 5 + 1
 	cooldown = 0.1 + min(0.2, level * 0.1)
 
 func _physics_process(delta: float):
@@ -71,11 +74,17 @@ func game_over():
 	ending_cooldown = 1.0
 	score.game_over()
 
+	var parent : Node2D = $".."
+	for c in parent.get_children():
+		if c is Fruit:
+			c.game_over = true
+		
+
 func do_ending(delta: float):
 	ending_cooldown -= delta
 	if ending_cooldown > 0.0 or ending_over:
 		return
-	ending_cooldown += 0.1
+	ending_cooldown += fruit_rng.randf() * 0.3 + 0.03
 	var parent : Node2D = $".."
 	for c in parent.get_children():
 		if c is Fruit and not c.popped:
