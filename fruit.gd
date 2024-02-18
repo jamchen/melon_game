@@ -35,10 +35,10 @@ static func get_target_scale(level_: int) -> float:
 		4, # orange
 		5, # red
 		6, # pale yellow
-		9, # pink
-		11, # yellow
-		13, # pale green
-		15 # green
+		7, # pink
+		8, # yellow
+		10, # pale green
+		12 # green
 		][level_ - 1]
 
 static func get_color(level_: int) -> Color:
@@ -75,7 +75,7 @@ func get_absorbed(other):
 	match level:
 		0,1,2,3:
 			sample = audio.combine7
-			pitch += (3 - level) * 0.1
+			pitch += (3 - level) * 0.1 - 0.2
 			volume += randf() * -1
 		4,5,6: 
 			sample = audio.combine4
@@ -83,13 +83,13 @@ func get_absorbed(other):
 			volume += 5 - (6 - level)
 		7,8,9:
 			sample = audio.combine2
-			pitch += (9 - level) * 0.1
+			pitch += (9 - level) * 0.1 + 0.5
 			volume += 5 - (9 - level)
 		10,11,12: 
 			sample = audio.combine6
-			pitch += (12 - level) * 0.1
+			pitch += (12 - level) * 0.1 + 1.0
 			volume += 8 - (12 - level)
-	audio.play_audio(sample, pitch + randf() * 0.1, volume)
+	audio.play_audio(sample, pitch + randf() * 0.1 + 0.7, volume)
 
 func _process(delta: float):
 	var t := 1.0 - pow(0.0001, delta)
@@ -183,4 +183,4 @@ func pop():
 			sample = audio.pop_big2
 			pitch += (12 - level) * 0.1
 			volume += (3 - (12 - level))
-	audio.play_audio(sample, pitch - randf() * 0.3, volume - randf() * 2)
+	audio.play_audio(sample, pitch - randf() * 0.3, volume - randf() * 2 - 5)
