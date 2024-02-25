@@ -94,7 +94,7 @@ func get_absorbed(other):
 			sample = audio.pop_v3
 			pitch = 1.0 + (5 - level) * 0.1
 			volume = (level - 8) * 1.0
-	print(level)
+	#print(level)
 	audio.play_audio(sample, pitch + randf() * 0.1 + 0.7, volume)
 
 func _process(delta: float):

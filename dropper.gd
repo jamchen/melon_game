@@ -5,6 +5,8 @@ onready var cursor : Node2D = $fruit_cursor
 onready var score : Score = $"/root/ui/score"
 var cursor_y : float
 var future_fruit : MeshInstance2D
+var target_x := 0.0
+var drop_queued := false
 
 var level := 1
 var future_level := 1
@@ -27,7 +29,7 @@ func _ready():
 	move_child(future_fruit, 0)
 	future_fruit.name = "FUTURE"
 	future_fruit.global_position = Vector2(-208, -280)
-	print_debug(future_fruit)
+	#print_debug(future_fruit)
 	cursor_y = cursor.position.y
 
 func make_fruit():
@@ -42,7 +44,7 @@ func make_fruit():
 	$"..".add_child(fruit)
 	fruit.global_position.y = cursor.global_position.y
 	var border_dist := border_const - Fruit.get_target_scale(level) * original_size.x
-	fruit.global_position.x = clamp(cursor.global_position.x, -border_dist, border_dist)
+	fruit.global_position.x = clamp(target_x, -border_dist, border_dist)
 	fruit.linear_velocity.y = 400.0
 	fruit.linear_velocity.x = 0
 	fruit.angular_velocity = fruit_rng.randf() * 0.2 - 0.1
@@ -59,15 +61,18 @@ func _physics_process(delta: float):
 		do_ending(delta)
 
 	cooldown -= delta
-	
 	var t : float = 1.0 - pow(0.0001, delta)
+	cursor.modulate = lerp(cursor.modulate, Fruit.get_color(level), t)
 	var target_scale := original_size * Fruit.get_target_scale(level)
 	cursor.scale = lerp(cursor.scale, target_scale, t)
 	var border_dist := border_const - cursor.scale.x
-	cursor.modulate = lerp(cursor.modulate, Fruit.get_color(level), t)
+
+	if not drop_queued:
+		target_x = clamp(get_local_mouse_position().x, -border_dist, border_dist)
+
 	if not is_game_over:
 		var pos_t : float = 1.0 - pow(0.0000001, delta)
-		var target_pos := Vector2(clamp(get_local_mouse_position().x, -border_dist, border_dist), cursor_y)
+		var target_pos := Vector2(target_x, cursor_y)
 		cursor.position = lerp(cursor.position, target_pos, pos_t)
 
 	future_fruit.scale = lerp(future_fruit.scale, original_size * Fruit.get_target_scale(future_level), t)
@@ -75,13 +80,17 @@ func _physics_process(delta: float):
 	#print_debug(str(level) + "<-" + str(future_level) )
 
 	if Input.is_key_pressed(KEY_I) and cooldown < 0.13:
+		drop_queued = true
+		
+	if drop_queued and abs(target_x - cursor.position.x) < 10:
 		make_fruit()
+		drop_queued = false
 
 func _input(event):
 	if event is InputEventMouseButton:
 		if not event.is_pressed():
 			if cooldown <= 0:
-				make_fruit()
+				drop_queued = true
 	elif event is InputEventKey:
 		if event.physical_scancode == KEY_ESCAPE and OS.has_feature("editor"):
 			get_tree().quit()
