@@ -9,6 +9,7 @@ onready var collider := $CollisionShape2D
 var absorber
 var popped := false
 var game_over := false
+var free_after_pop := 2.0
 
 const baked_colors := [
 		Color(0.9725, 0, 0.2471, 1),
@@ -73,22 +74,27 @@ func get_absorbed(other):
 	var pitch := 1.0
 	var volume := 0.0
 	match level:
-		0,1,2,3:
+		1,2,3,4:
 			sample = audio.combine7
 			pitch += (3 - level) * 0.1 - 0.2
 			volume += randf() * -1
-		4,5,6: 
+		5,6: 
 			sample = audio.combine4
-			pitch += (15 - level) * 0.05
-			volume += 5 - (9 - level)
-		7,8,9:
+			pitch += (17 - level) * 0.05
+			volume += 5 - (12 - level)
+		7,8:
 			sample = audio.combine2
-			pitch += (13 - level) * 0.1 + 0.5
-			volume += 5 - (15 - level)
-		10,11,12: 
+			pitch += (17 - level) * 0.08 + 0.5
+			volume += 5 - (20 - level * 2)
+		9,10: 
 			sample = audio.combine6
-			pitch += (20 - level) * 0.1 + 1.0
-			volume += 8 - (17 - level)
+			pitch += (20 - level) * 0.1 + 0.0
+			volume += 1 - (20 - level)
+		11:
+			sample = audio.pop_v3
+			pitch = 1.0 + (5 - level) * 0.1
+			volume = (level - 8) * 1.0
+	print(level)
 	audio.play_audio(sample, pitch + randf() * 0.1 + 0.7, volume)
 
 func _process(delta: float):
@@ -134,8 +140,8 @@ func do_combining(delta: float):
 		if level >= 12:
 			level = 11
 			cooldown = 1000
-			queue_free()
-			node.queue_free()
+			pop()
+			node.pop()
 		else:
 			node.get_absorbed(self)
 		return
@@ -143,6 +149,14 @@ func do_combining(delta: float):
 func _physics_process(delta: float):
 	if is_queued_for_deletion():
 		return
+		
+	if popped:
+		if free_after_pop <= delta:
+			queue_free()
+			return
+		else:
+			free_after_pop -= delta
+		
 	do_combining(delta)
 
 	var t := 1.0 - pow(0.0001, delta)
