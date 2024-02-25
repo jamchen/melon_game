@@ -14,12 +14,9 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.96, 0.96 )
 
 [node name="walls" type="Node" parent="."]
-
-[node name="wall_left" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( -220, 27 )
-scale = Vector2( 1.852, 25 )
 
 [node name="wall_left_ext" type="StaticBody2D" parent="walls"]
 position = Vector2( -338, 201 )
@@ -35,13 +32,17 @@ scale = Vector2( 10, 38.76 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/wall_right_ext"]
 shape = SubResource( 1 )
 
+[node name="wall_left" parent="walls" instance=ExtResource( 1 )]
+position = Vector2( -220, 27 )
+scale = Vector2( 2, 25 )
+
 [node name="wall_right" parent="walls" instance=ExtResource( 1 )]
 position = Vector2( 220, 27 )
-scale = Vector2( 1.852, 25 )
+scale = Vector2( 2, 25 )
 
 [node name="floor" type="StaticBody2D" parent="walls"]
-position = Vector2( 0, 296 )
-scale = Vector2( 23.856, 2 )
+position = Vector2( 0, 292 )
+scale = Vector2( 24, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/floor"]
 position = Vector2( 0, 90 )

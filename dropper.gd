@@ -31,11 +31,14 @@ func _ready():
 	future_fruit.global_position = Vector2(-208, -280)
 	#print_debug(future_fruit)
 	cursor_y = cursor.position.y
+	cursor.global_position = future_fruit.global_position
+
+func maybe_restart():
+	if is_game_over and ending_over:
+		get_tree().reload_current_scene()
 
 func make_fruit():
 	if is_game_over:
-		if ending_over:
-			get_tree().reload_current_scene()
 		return
 	
 	score.end_combo()
@@ -49,7 +52,7 @@ func make_fruit():
 	fruit.linear_velocity.x = 0
 	fruit.angular_velocity = fruit_rng.randf() * 0.2 - 0.1
 	level = future_level
-	future_level = int(clamp(abs(fruit_rng.randfn(0.5, 2.0)) + 1, 1, 5))
+	future_level = int(clamp(abs(fruit_rng.randfn(0.5, 2.3)) + 1, 1, 5))
 	cooldown = 0.1 + min(0.2, level * 0.1)
 	
 	cursor.global_position = future_fruit.global_position
@@ -81,6 +84,7 @@ func _physics_process(delta: float):
 
 	if Input.is_key_pressed(KEY_I) and cooldown < 0.13:
 		drop_queued = true
+		maybe_restart()
 		
 	if drop_queued and abs(target_x - cursor.position.x) < 10:
 		make_fruit()
@@ -91,6 +95,7 @@ func _input(event):
 		if not event.is_pressed():
 			if cooldown <= 0:
 				drop_queued = true
+		maybe_restart()
 	elif event is InputEventKey:
 		if event.physical_scancode == KEY_ESCAPE and OS.has_feature("editor"):
 			get_tree().quit()
