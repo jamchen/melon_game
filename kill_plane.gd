@@ -8,6 +8,10 @@ func _process(_delta):
 		dropper.game_over()
 		return
 
+	if Input.is_key_pressed(KEY_R):
+		dropper.game_over()
+		return
+
 	for body in get_overlapping_bodies():
 		if body is Fruit:
 			dropper.game_over()

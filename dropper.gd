@@ -78,13 +78,16 @@ func game_over():
 	for c in parent.get_children():
 		if c is Fruit:
 			c.game_over = true
-		
+
+var cooldown_progress := 1.0
 
 func do_ending(delta: float):
 	ending_cooldown -= delta
 	if ending_cooldown > 0.0 or ending_over:
 		return
-	ending_cooldown += fruit_rng.randf() * 0.3 + 0.03
+	ending_cooldown += fruit_rng.randf() * 0.25 * max(0.1, cooldown_progress) + 0.01 * max(0.1, cooldown_progress)
+	ending_cooldown = max(ending_cooldown, delta * 0.75)
+	cooldown_progress *= 0.97
 	var parent : Node2D = $".."
 	for c in parent.get_children():
 		if c is Fruit and not c.popped:

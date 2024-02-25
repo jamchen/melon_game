@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/combine3.wav-0e08210aef19276aa1df218190cfcb5d.sample"
+path="res://.import/day2_pop_2.wav-486caf459484a3673f73dc39660874e8.sample"
 
 [deps]
 
-source_file="res://sfx/combine3.wav"
-dest_files=[ "res://.import/combine3.wav-0e08210aef19276aa1df218190cfcb5d.sample" ]
+source_file="res://sfx/day2_pop_2.wav"
+dest_files=[ "res://.import/day2_pop_2.wav-486caf459484a3673f73dc39660874e8.sample" ]
 
 [params]
 

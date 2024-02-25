@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/combine.wav-7ec3fbe14f0961309b54b500319d3a84.sample"
+path="res://.import/opening_a_soda_pop.wav-d5994ebaccaa88a9867aee72cff6bfc7.sample"
 
 [deps]
 
-source_file="res://sfx/combine.wav"
-dest_files=[ "res://.import/combine.wav-7ec3fbe14f0961309b54b500319d3a84.sample" ]
+source_file="res://sfx/opening_a_soda_pop.wav"
+dest_files=[ "res://.import/opening_a_soda_pop.wav-d5994ebaccaa88a9867aee72cff6bfc7.sample" ]
 
 [params]
 

@@ -69,7 +69,7 @@ func get_absorbed(other):
 	mesh.owner = $".."
 	mesh.global_position = global_position
 	var audio : Audio = $"../audio"
-	var sample := audio.combine5
+	var sample := audio.combine7
 	var pitch := 1.0
 	var volume := 0.0
 	match level:
@@ -79,16 +79,16 @@ func get_absorbed(other):
 			volume += randf() * -1
 		4,5,6: 
 			sample = audio.combine4
-			pitch += (6 - level) * 0.1
-			volume += 5 - (6 - level)
+			pitch += (15 - level) * 0.05
+			volume += 5 - (9 - level)
 		7,8,9:
 			sample = audio.combine2
-			pitch += (9 - level) * 0.1 + 0.5
-			volume += 5 - (9 - level)
+			pitch += (13 - level) * 0.1 + 0.5
+			volume += 5 - (15 - level)
 		10,11,12: 
 			sample = audio.combine6
-			pitch += (12 - level) * 0.1 + 1.0
-			volume += 8 - (12 - level)
+			pitch += (20 - level) * 0.1 + 1.0
+			volume += 8 - (17 - level)
 	audio.play_audio(sample, pitch + randf() * 0.1 + 0.7, volume)
 
 func _process(delta: float):
@@ -163,24 +163,9 @@ func _scale_2d(target_scale: Vector2):
 func pop():
 	popped = true
 	var audio : Audio = $"../audio"
-	var sample := audio.pop
+	var sample := audio.pop_v3
 	var pitch := 1.0
 	var volume := 0.0
-	match level:
-		0,1,2,3:
-			sample = audio.pop_small3
-			pitch += (3 - level) * 0.2 - 0.3
-			volume += (3 - level) * 1.0 - 10
-		4,5,6:
-			sample = audio.pop_med
-			pitch += (6 - level) * 0.1
-			volume += (-2 - (6 - level)) * 1.0
-		7,8,9:
-			sample = audio.pop_big
-			pitch += (9 - level) * 0.1
-			volume += (0 - (9 - level))
-		10,11,12: 
-			sample = audio.pop_big2
-			pitch += (12 - level) * 0.1
-			volume += (3 - (12 - level))
-	audio.play_audio(sample, pitch - randf() * 0.3, volume - randf() * 2 - 5)
+	pitch = 1.0 + (5 - level) * 0.1
+	volume = (level - 8) * 1.0
+	audio.play_audio(sample, pitch - randf() * 0.01, volume - randf() * 2 - 5)
