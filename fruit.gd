@@ -29,24 +29,24 @@ const baked_colors := [
 
 static func get_target_scale(level_: int) -> float:
 	return [
-		1, # red
+		1,   # red
 		1.5, # pink
-		2, # purple
-		3, # yellow
-		4, # orange
-		5, # red
-		6, # pale yellow
-		7, # pink
-		8, # yellow
-		10, # pale green
-		12 # green
-		][level_ - 1]
+		2.1, # purple
+		2.4, # yellow
+		3,   # orange
+		3.6, # red
+		3.8, # pale yellow
+		5.3, # pink
+		6.1, # yellow
+		8.5, # pale green
+		10   # green
+		][level_ - 1] * 1.42
 
 static func get_color(level_: int) -> Color:
 	return baked_colors[level_ - 1]
 
 static func get_target_mass(level_: int) -> float:
-	return pow(2.0, level_ - 1)
+	return pow(get_target_scale(level_), 2.0)
 
 func _ready():
 	#if false and colors != baked_colors:

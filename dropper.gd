@@ -13,7 +13,7 @@ var future_level := 1
 const prefab : PackedScene = preload("res://fruit.tscn")
 const original_size := Vector2(10,10)
 var cooldown := 0.0
-const border_const := 200
+const border_const := 199.9
 
 var is_game_over : bool = false
 var ending_over : bool = false
@@ -22,7 +22,7 @@ var ending_cooldown : float = 0.0
 var fruit_rng := RandomNumberGenerator.new()
 
 func _ready():
-	fruit_rng.set_seed(4) # Chosen with a fair dice roll (also the sequence starts with two small fruits)
+	fruit_rng.set_seed(7) # Chosen with a fair dice roll (also the sequence starts with two small fruits)
 	score.level_start()
 	future_fruit = cursor.duplicate()
 	add_child(future_fruit)
