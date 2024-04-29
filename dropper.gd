@@ -160,6 +160,7 @@ func take_screenshot():
 	data.unlock()
 	var img :ImageTexture= ImageTexture.new()
 	img.flags = 0
+	img.lossy_quality = 0.98
 	img.create_from_image(data)
 	print(img.get_size(), "; ", get_viewport().size)
 	img.set_size_override(Vector2(data.get_size().x/data.get_size().y, 1) * ProjectSettings.get_setting("display/window/size/height"))
