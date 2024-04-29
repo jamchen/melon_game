@@ -126,13 +126,24 @@ func take_screenshot():
 	screenshot_taken = true
 	var data :Image= get_viewport().get_texture().get_data()
 	if data.get_size().x > data.get_size().y:
+		var w := data.get_size().y
 		var h := data.get_size().y
-		var offset_x = (data.get_size().x - h)/2
+		var offset_x = (data.get_size().x - w)/2
 		var data_cropped :Image= Image.new()
 		data_cropped.copy_from(data)
-		data_cropped.blit_rect(data, Rect2(offset_x, 0, h, h), Vector2.ZERO)
-		data_cropped.crop(h,h)
+		data_cropped.blit_rect(data, Rect2(offset_x, 0, w, h), Vector2.ZERO)
+		data_cropped.crop(w,h)
 		data = data_cropped
+	elif data.get_size().y > data.get_size().x * 1.3:
+		var w := data.get_size().x
+		var h := w * 1.3
+		var offset_y = (data.get_size().y - h)/2
+		var data_cropped :Image= Image.new()
+		data_cropped.copy_from(data)
+		data_cropped.blit_rect(data, Rect2(0, offset_y, w, h), Vector2.ZERO)
+		data_cropped.crop(w,h)
+		data = data_cropped
+		
 	data.flip_y()
 	data.lock()
 	var border_color := Color(1,1,1,1)
