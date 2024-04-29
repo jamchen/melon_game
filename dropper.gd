@@ -20,6 +20,10 @@ var ending_over : bool = false
 var ending_cooldown : float = 0.0
 
 var fruit_rng := RandomNumberGenerator.new()
+onready var screenshot : Sprite = $"/root/transition/screenshot"
+onready var screenshot_anim :AnimationPlayer= $"/root/transition"
+var screenshot_taken := false
+var eat_release := true
 
 func _ready():
 	fruit_rng.set_seed(7) # Chosen with a fair dice roll (also the sequence starts with two small fruits)
@@ -34,7 +38,8 @@ func _ready():
 	cursor.global_position = future_fruit.global_position
 
 func maybe_restart():
-	if is_game_over and ending_over:
+	if is_game_over and ending_over and not screenshot_anim.is_playing():
+		screenshot_anim.play("go_away")
 		get_tree().reload_current_scene()
 
 func make_fruit():
@@ -61,6 +66,8 @@ func make_fruit():
 
 func _physics_process(delta: float):
 	if is_game_over:
+		if not screenshot_taken:
+			take_screenshot()
 		do_ending(delta)
 
 	cooldown -= delta
@@ -92,9 +99,11 @@ func _physics_process(delta: float):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if not event.is_pressed():
+		if not event.is_pressed() and not eat_release:
 			if cooldown <= 0:
 				drop_queued = true
+		else:
+			eat_release = false
 		maybe_restart()
 	elif event is InputEventKey:
 		if event.physical_scancode == KEY_ESCAPE and OS.has_feature("editor"):
@@ -113,6 +122,38 @@ func game_over():
 		if c is Fruit:
 			c.game_over = true
 
+func take_screenshot():
+	screenshot_taken = true
+	var data :Image= get_viewport().get_texture().get_data()
+	if data.get_size().x > data.get_size().y:
+		var h := data.get_size().y
+		var offset_x = (data.get_size().x - h)/2
+		var data_cropped :Image= Image.new()
+		data_cropped.copy_from(data)
+		data_cropped.blit_rect(data, Rect2(offset_x, 0, h, h), Vector2.ZERO)
+		data_cropped.crop(h,h)
+		data = data_cropped
+	data.flip_y()
+	data.lock()
+	var border_color := Color(1,1,1,1)
+	for x in range(data.get_size().x):
+		data.set_pixel(x, 0, border_color)
+		data.set_pixel(x, 1, border_color)
+		data.set_pixel(x, data.get_size().y - 1, border_color)
+		data.set_pixel(x, data.get_size().y - 2, border_color)
+	for y in range(data.get_size().y):
+		data.set_pixel(0, y, border_color)
+		data.set_pixel(1, y, border_color)
+		data.set_pixel(data.get_size().x - 2, y, border_color)
+		data.set_pixel(data.get_size().x - 1, y, border_color)
+	data.unlock()
+	var img :ImageTexture= ImageTexture.new()
+	img.flags = ImageTexture.FLAG_FILTER
+	img.create_from_image(data)
+	print(img.get_size(), "; ", get_viewport().size)
+	img.set_size_override(Vector2(data.get_size().x/data.get_size().y, 1) * ProjectSettings.get_setting("display/window/size/height"))
+	screenshot.texture = img
+
 var cooldown_progress := 1.0
 
 func do_ending(delta: float):
@@ -128,3 +169,4 @@ func do_ending(delta: float):
 			c.pop()
 			return
 	ending_over = true
+	screenshot_anim.play("screenshot")
