@@ -147,22 +147,20 @@ func take_screenshot():
 	data.flip_y()
 	data.lock()
 	var border_color := Color(1,1,1,1)
+	border_color.r8 = 26 # match the fade color to blend the borders
+	border_color.g8 = 26
+	border_color.b8 = 26
 	for x in range(data.get_size().x):
 		data.set_pixel(x, 0, border_color)
-		data.set_pixel(x, 1, border_color)
 		data.set_pixel(x, data.get_size().y - 1, border_color)
-		data.set_pixel(x, data.get_size().y - 2, border_color)
 	for y in range(data.get_size().y):
 		data.set_pixel(0, y, border_color)
-		data.set_pixel(1, y, border_color)
-		data.set_pixel(data.get_size().x - 2, y, border_color)
 		data.set_pixel(data.get_size().x - 1, y, border_color)
 	data.unlock()
 	var img :ImageTexture= ImageTexture.new()
 	img.flags = 0
 	img.lossy_quality = 0.98
 	img.create_from_image(data)
-	print(img.get_size(), "; ", get_viewport().size)
 	img.set_size_override(Vector2(data.get_size().x/data.get_size().y, 1) * ProjectSettings.get_setting("display/window/size/height"))
 	screenshot.texture = img
 

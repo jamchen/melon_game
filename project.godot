@@ -42,7 +42,7 @@ config/name="MelooniPeli3"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 config/features=PoolStringArray( "3.6" )
-config/build_datetime="2024-04-29T15:54:50"
+config/build_datetime="2024-04-29T16:03:27"
 
 [autoload]
 
