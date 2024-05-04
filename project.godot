@@ -38,11 +38,14 @@ _global_script_class_icons={
 
 [application]
 
-config/name="MelooniPeli3"
+config/name="melon"
 run/main_scene="res://main.tscn"
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.png"
 config/features=PoolStringArray( "3.6" )
-config/build_datetime="2024-04-29T16:03:27"
+config/build_datetime="2024-05-04T17:50:56"
 
 [autoload]
 
