@@ -38,14 +38,14 @@ _global_script_class_icons={
 
 [application]
 
-config/name="melon"
+config/name="🥝"
 run/main_scene="res://main.tscn"
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 config/features=PoolStringArray( "3.6" )
-config/build_datetime="2024-05-04T17:52:33"
+config/build_datetime="2024-05-07T16:53:35"
 
 [autoload]
 
