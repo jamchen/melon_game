@@ -6,61 +6,33 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "AudioStreamPlayer",
-"class": "Audio",
-"language": "GDScript",
-"path": "res://audio.gd"
-}, {
-"base": "Node2D",
-"class": "Dropper",
-"language": "GDScript",
-"path": "res://dropper.gd"
-}, {
-"base": "RigidBody2D",
-"class": "Fruit",
-"language": "GDScript",
-"path": "res://fruit.gd"
-}, {
-"base": "Label",
-"class": "Score",
-"language": "GDScript",
-"path": "res://score.gd"
-} ]
-_global_script_class_icons={
-"Audio": "",
-"Dropper": "",
-"Fruit": "",
-"Score": ""
-}
+config_version=5
 
 [application]
 
 config/name="🥝"
 run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.3")
+run/max_fps=60
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://icon.png"
-config/features=PoolStringArray( "3.6" )
-config/build_datetime="2024-05-07T16:53:35"
+config/build_datetime="2024-05-18T17:55:30"
 
 [autoload]
 
-ui="*res://ui.tscn"
 buildtime_printer="*res://buildtime_printer.gd"
 transition="*res://transition_animation.tscn"
+ui="*res://ui.tscn"
 
 [display]
 
-window/size/width=500
-window/size/height=648
+window/size/viewport_width=500
 window/energy_saving/keep_screen_on=false
-window/handheld/orientation="portrait"
-window/stretch/mode="2d"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/handheld/orientation="portrait"
 
 [gui]
 
@@ -68,18 +40,20 @@ common/drop_mouse_on_gui_input_disabled=true
 
 [mono]
 
-project/assembly_name="MelooniPeli3"
+project/assembly_name="melon_game"
 
 [physics]
 
 common/physics_jitter_fix=0.0
-common/enable_pause_aware_picking=true
 2d/default_gravity=980
+common/enable_pause_aware_picking=true
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_environment="res://default_env.tres"
 quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 quality/filters/use_fxaa=true
-environment/default_environment="res://default_env.tres"

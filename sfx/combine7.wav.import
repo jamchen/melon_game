@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/combine7.wav-8d424899c8ba1a963e9c68e0711aeb46.sample"
+type="AudioStreamWAV"
+uid="uid://dnrbw1bj1608s"
+path="res://.godot/imported/combine7.wav-8d424899c8ba1a963e9c68e0711aeb46.sample"
 
 [deps]
 
 source_file="res://sfx/combine7.wav"
-dest_files=[ "res://.import/combine7.wav-8d424899c8ba1a963e9c68e0711aeb46.sample" ]
+dest_files=["res://.godot/imported/combine7.wav-8d424899c8ba1a963e9c68e0711aeb46.sample"]
 
 [params]
 

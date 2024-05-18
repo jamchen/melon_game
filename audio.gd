@@ -17,7 +17,7 @@ func _new_stream() -> AudioStreamPlayer:
 
 func _ready():
 	for i in range(10):
-		 _new_stream()
+		_new_stream()
 
 func play_audio(sample: AudioStream, pitch : float, volume : float):
 	for a in _streams:

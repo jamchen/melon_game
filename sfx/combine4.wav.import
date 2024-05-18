@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/combine4.wav-da4ee7cc0f70e29414fe5a3e37e5d14c.sample"
+type="AudioStreamWAV"
+uid="uid://1w81e4p80fy5"
+path="res://.godot/imported/combine4.wav-da4ee7cc0f70e29414fe5a3e37e5d14c.sample"
 
 [deps]
 
 source_file="res://sfx/combine4.wav"
-dest_files=[ "res://.import/combine4.wav-da4ee7cc0f70e29414fe5a3e37e5d14c.sample" ]
+dest_files=["res://.godot/imported/combine4.wav-da4ee7cc0f70e29414fe5a3e37e5d14c.sample"]
 
 [params]
 

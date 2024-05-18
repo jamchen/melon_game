@@ -5,7 +5,7 @@ var combo_counter := 1
 var score := 0
 var is_game_over := true
 
-onready var fade : Sprite = $"/root/transition/fade"
+@onready var fade : Sprite2D = $"/root/transition/fade"
 
 func _ready():
 	text = ""
@@ -35,5 +35,5 @@ func game_over():
 	is_game_over = true
 	$"../prev_score".text = ""
 	
-func _process(delta:float):
+func _process(_delta:float):
 	modulate.a = pow(1 - fade.modulate.a, 4)

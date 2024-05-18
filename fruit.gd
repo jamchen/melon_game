@@ -1,11 +1,11 @@
 extends RigidBody2D
 class_name Fruit
 
-export var level := 1
+@export var level := 1
 var current_scale := Vector2(1,1)
 var cooldown := 0.1
-onready var mesh := $MeshInstance2D
-onready var collider := $CollisionShape2D
+@onready var mesh := $MeshInstance2D
+@onready var collider := $CollisionShape2D
 var absorber
 var popped := false
 var game_over := false

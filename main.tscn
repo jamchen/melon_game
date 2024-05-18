@@ -1,82 +1,83 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://cln1wov33m0k2"]
 
-[ext_resource path="res://wall.tscn" type="PackedScene" id=1]
-[ext_resource path="res://kill_plane.tscn" type="PackedScene" id=2]
-[ext_resource path="res://dropper.gd" type="Script" id=3]
-[ext_resource path="res://audio.gd" type="Script" id=4]
-[ext_resource path="res://white.png" type="Texture" id=5]
+[ext_resource type="PackedScene" uid="uid://bpqxa5bkg6dw5" path="res://wall.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://kill_plane.tscn" id="2"]
+[ext_resource type="Script" path="res://dropper.gd" id="3"]
+[ext_resource type="Script" path="res://audio.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://880nesyoe88f" path="res://white.png" id="5"]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id="1"]
 
-[sub_resource type="SphereMesh" id=2]
+[sub_resource type="SphereMesh" id="2"]
+radius = 1.0
+height = 2.0
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.96, 0.96 )
+zoom = Vector2(0.96, 0.96)
 
 [node name="walls" type="Node" parent="."]
 
 [node name="wall_left_ext" type="StaticBody2D" parent="walls"]
-position = Vector2( -338, 201 )
-scale = Vector2( 10, 38.76 )
+position = Vector2(-338, 201)
+scale = Vector2(10, 38.76)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/wall_left_ext"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="wall_right_ext" type="StaticBody2D" parent="walls"]
-position = Vector2( 337, 201 )
-scale = Vector2( 10, 38.76 )
+position = Vector2(337, 201)
+scale = Vector2(10, 38.76)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/wall_right_ext"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
-[node name="wall_left" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( -220, 27 )
-scale = Vector2( 2, 25 )
+[node name="wall_left" parent="walls" instance=ExtResource("1")]
+position = Vector2(-220, 27)
+scale = Vector2(2, 25)
 
-[node name="wall_right" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( 220, 27 )
-scale = Vector2( 2, 25 )
+[node name="wall_right" parent="walls" instance=ExtResource("1")]
+position = Vector2(220, 27)
+scale = Vector2(2, 25)
 
 [node name="floor" type="StaticBody2D" parent="walls"]
-position = Vector2( 0, 292 )
-scale = Vector2( 24, 2 )
+position = Vector2(0, 292)
+scale = Vector2(24, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/floor"]
-position = Vector2( 0, 90 )
-scale = Vector2( 1, 10 )
-shape = SubResource( 1 )
+position = Vector2(0, 90)
+scale = Vector2(1, 10)
+shape = SubResource("1")
 
-[node name="Sprite" type="Sprite" parent="walls/floor"]
-modulate = Color( 0.780392, 0.537255, 0.372549, 1 )
-scale = Vector2( 5, 5 )
-texture = ExtResource( 5 )
+[node name="Sprite2D" type="Sprite2D" parent="walls/floor"]
+modulate = Color(0.780392, 0.537255, 0.372549, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("5")
 
-[node name="kill_plane4" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( -400, -270.055 )
-scale = Vector2( 10, 10 )
+[node name="kill_plane4" parent="walls" instance=ExtResource("2")]
+position = Vector2(-400, -270.055)
+scale = Vector2(10, 10)
 
-[node name="kill_plane6" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( -350, -92 )
-scale = Vector2( 10, 10 )
+[node name="kill_plane6" parent="walls" instance=ExtResource("2")]
+position = Vector2(-350, -92)
+scale = Vector2(10, 10)
 
-[node name="kill_plane7" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( 350, -94 )
-scale = Vector2( 10, 10 )
+[node name="kill_plane7" parent="walls" instance=ExtResource("2")]
+position = Vector2(350, -94)
+scale = Vector2(10, 10)
 
-[node name="kill_plane5" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( 400, -270.055 )
-scale = Vector2( 10, 10 )
+[node name="kill_plane5" parent="walls" instance=ExtResource("2")]
+position = Vector2(400, -270.055)
+scale = Vector2(10, 10)
 
 [node name="dropper" type="Node2D" parent="."]
-position = Vector2( 0, -296 )
-script = ExtResource( 3 )
+position = Vector2(0, -296)
+script = ExtResource("3")
 
 [node name="fruit_cursor" type="MeshInstance2D" parent="dropper"]
-scale = Vector2( 10, 10 )
-mesh = SubResource( 2 )
+scale = Vector2(10, 10)
+mesh = SubResource("2")
 
 [node name="audio" type="AudioStreamPlayer" parent="."]
-script = ExtResource( 4 )
+script = ExtResource("4")

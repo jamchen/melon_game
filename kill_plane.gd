@@ -1,6 +1,6 @@
 extends Area2D
 
-onready var dropper : Dropper = $"/root/Node2D/dropper"
+@onready var dropper : Dropper = $"/root/Node2D/dropper"
 var restart_queued := false
 
 func _process(_delta):
