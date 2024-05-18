@@ -158,7 +158,8 @@ func take_screenshot():
 		data.set_pixel(data.get_size().x - 1, y, border_color)
 	false # data.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var img :ImageTexture= ImageTexture.create_from_image(data)
-	img.set_size_override(Vector2i(data.get_size().x/data.get_size().y, 1) * ProjectSettings.get_setting("display/window/size/viewport_height"))
+	var aspect := data.get_size().x/(float)(data.get_size().y)
+	img.set_size_override(Vector2(aspect, 1) * ProjectSettings.get_setting("display/window/size/viewport_height"))
 	screenshot.texture = img
 
 var cooldown_progress := 1.0

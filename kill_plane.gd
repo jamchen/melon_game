@@ -3,6 +3,11 @@ extends Area2D
 @onready var dropper : Dropper = $"/root/Node2D/dropper"
 var restart_queued := false
 
+func _input(event):
+	if event is InputEventScreenTouch:
+		if event.index == 4:
+			dropper.game_over()
+
 func _process(_delta):
 	if restart_queued:
 		dropper.game_over()

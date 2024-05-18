@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dh3b0d1beoidi"]
+[gd_scene load_steps=11 format=3 uid="uid://dh3b0d1beoidi"]
 
 [ext_resource type="Script" path="res://score.gd" id="1_ifnu7"]
 [ext_resource type="SystemFont" uid="uid://gg8bnmsmqucg" path="res://score_font.tres" id="2_ni8s0"]
 [ext_resource type="Texture2D" uid="uid://880nesyoe88f" path="res://white.png" id="2_xkflp"]
+[ext_resource type="Script" path="res://give_up.gd" id="4_qtv6i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwh1w"]
 
@@ -72,6 +73,7 @@ cache/0/16/0/glyphs/55/offset = Vector2(0, 0)
 cache/0/16/0/glyphs/55/size = Vector2(0, 0)
 cache/0/16/0/glyphs/55/uv_rect = Rect2(153, 0, 22, 40)
 cache/0/16/0/glyphs/55/texture_idx = 0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 script = SubResource("GDScript_8ryb8")
 
 [sub_resource type="Theme" id="Theme_xulr0"]
@@ -124,3 +126,14 @@ theme = SubResource("Theme_xulr0")
 text = "1234567890"
 label_settings = SubResource("LabelSettings_ptixw")
 vertical_alignment = 1
+
+[node name="give_up" type="Button" parent="."]
+visible = false
+offset_left = -243.0
+offset_top = -306.0
+offset_right = -179.0
+offset_bottom = -275.0
+text = "give up"
+script = ExtResource("4_qtv6i")
+
+[connection signal="pressed" from="give_up" to="give_up" method="_on_pressed"]
