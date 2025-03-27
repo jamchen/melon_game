@@ -108,8 +108,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gt2tj"]
 _data = {
-"go_away": SubResource("4"),
-"screenshot": SubResource("3")
+&"go_away": SubResource("4"),
+&"screenshot": SubResource("3")
 }
 
 [node name="ending_animation" type="AnimationPlayer"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cln1wov33m0k2"]
 
 [ext_resource type="PackedScene" uid="uid://bpqxa5bkg6dw5" path="res://wall.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://kill_plane.tscn" id="2"]
-[ext_resource type="Script" path="res://dropper.gd" id="3"]
-[ext_resource type="Script" path="res://audio.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://fjpy2fl1iguo" path="res://kill_plane.tscn" id="2"]
+[ext_resource type="Script" uid="uid://38q0d04nrsh4" path="res://dropper.gd" id="3"]
+[ext_resource type="Script" uid="uid://bvvwdlwwv88h2" path="res://audio.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://880nesyoe88f" path="res://white.png" id="5"]
 
 [sub_resource type="RectangleShape2D" id="1"]
