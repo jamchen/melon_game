@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cser1bdynrni"]
 
-[ext_resource type="Script" path="res://fruit.gd" id="1_axxot"]
+[ext_resource type="Script" uid="uid://cpbrat0yx16oa" path="res://fruit.gd" id="1_axxot"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qqvy6"]
 friction = 0.1
@@ -25,5 +25,9 @@ script = ExtResource("1_axxot")
 shape = SubResource("CircleShape2D_e30vr")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
 scale = Vector2(10.3, 10.3)
 mesh = SubResource("SphereMesh_uo6s3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
