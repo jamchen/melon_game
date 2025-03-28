@@ -51,7 +51,7 @@ scale = Vector2(1, 10)
 shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="walls/floor"]
-modulate = Color(0.780392, 0.537255, 0.372549, 1)
+modulate = Color(0.157, 0.784, 0.784, 1)
 scale = Vector2(5, 5)
 texture = ExtResource("5")
 
