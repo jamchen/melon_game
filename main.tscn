@@ -75,9 +75,15 @@ scale = Vector2(10, 10)
 position = Vector2(0, -296)
 script = ExtResource("3")
 
-[node name="fruit_cursor" type="MeshInstance2D" parent="dropper"]
+[node name="fruit_cursor" type="Node2D" parent="dropper"]
 scale = Vector2(10, 10)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="dropper/fruit_cursor"]
+visible = false
 mesh = SubResource("2")
+
+[node name="sprite" type="Sprite2D" parent="dropper/fruit_cursor"]
+scale = Vector2(0.05, 0.05)
 
 [node name="audio" type="AudioStreamPlayer" parent="."]
 script = ExtResource("4")
