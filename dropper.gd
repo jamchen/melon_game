@@ -1,8 +1,10 @@
 extends Node2D
 class_name Dropper
 
-@onready var cursor: Node2D = $fruit_cursor
-@onready var score: Score = $"/root/ui/score"
+#@onready var cursor: Node2D = $fruit_cursor
+#@onready var score: Score = $"/root/ui/score"
+@onready var cursor: Node2D = get_node_or_null("fruit_cursor")
+@onready var score: Score = get_node_or_null("/root/ui/score")
 var cursor_y: float
 var future_fruit: Node2D
 var target_x := 0.0
@@ -20,8 +22,10 @@ var ending_over: bool = false
 var ending_cooldown: float = 0.0
 
 var fruit_rng := RandomNumberGenerator.new()
-@onready var screenshot: Sprite2D = $"/root/transition/screenshot"
-@onready var screenshot_anim: AnimationPlayer = $"/root/transition"
+#@onready var screenshot: Sprite2D = $"/root/transition/screenshot"
+#@onready var screenshot_anim: AnimationPlayer = $"/root/transition"
+@onready var screenshot: Sprite2D = get_node_or_null("/root/transition/screenshot")
+@onready var screenshot_anim: AnimationPlayer = get_node_or_null("/root/transition")
 var screenshot_taken := false
 var eat_release := true
 
@@ -59,6 +63,7 @@ func _ready():
 	
 	# Set up the future fruit preview
 	future_fruit = cursor.duplicate()
+
 	add_child(future_fruit)
 	move_child(future_fruit, 0)
 	future_fruit.name = "FUTURE"
@@ -200,7 +205,17 @@ func _physics_process(delta: float):
 
 	cooldown -= delta
 	var t: float = 1.0 - pow(0.0001, delta)
+	
+	#var target_scale := original_size * Fruit.get_target_scale(level)
+	var scale_factor = 1.0
+	if "get_target_scale" in Fruit:
+		scale_factor = Fruit.get_target_scale(level)
+	else:
+		push_error("Fruit 類別內找不到 get_target_scale 方法");
 	var target_scale := original_size * Fruit.get_target_scale(level)
+
+	
+	
 	cursor.scale = lerp(cursor.scale, target_scale, t)
 	var border_dist := border_const - cursor.scale.x
 
@@ -214,9 +229,12 @@ func _physics_process(delta: float):
 
 	future_fruit.scale = lerp(future_fruit.scale, original_size * Fruit.get_target_scale(future_level), t)
 
+	#if Input.is_key_pressed(KEY_I) and cooldown < 0.13:
+		#drop_queued = true
+		#maybe_restart()
+		
 	if Input.is_key_pressed(KEY_I) and cooldown < 0.13:
 		drop_queued = true
-		maybe_restart()
 		
 	if drop_queued and abs(target_x - cursor.position.x) < 10:
 		make_fruit()
@@ -234,18 +252,36 @@ func _input(event):
 		if event.physical_keycode == KEY_ESCAPE and OS.has_feature("editor"):
 			get_tree().quit()
 
+#func game_over():
+	#if is_game_over:
+		#return
+	#is_game_over = true
+	#ending_over = false
+	#ending_cooldown = 1.0
+	#score.game_over()
+#
+	#var parent: Node2D = $".."
+	#for c in parent.get_children():
+		#if c is Fruit:
+			#c.game_over = true
+			
 func game_over():
 	if is_game_over:
 		return
 	is_game_over = true
 	ending_over = false
 	ending_cooldown = 1.0
-	score.game_over()
-
-	var parent: Node2D = $".."
-	for c in parent.get_children():
+	if score:
+		score.game_over()
+	
+	var fruits = []
+	for c in $"..".get_children():
 		if c is Fruit:
-			c.game_over = true
+			fruits.append(c)
+	
+	for f in fruits:
+		f.game_over = true
+
 
 func take_screenshot():
 	screenshot_taken = true
