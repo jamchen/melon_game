@@ -96,8 +96,13 @@ func _ready():
 	#	for c in colors: 
 	#		print("\t\tColor", c, ",")
 	#	print("\t]")
+	add_to_group("fruits")  # 把水果加到 "fruits" 群組
 	contact_monitor = true
 	set_max_contacts_reported(50)
+	
+	
+
+	
 	
 	update_fruit_appearance()
 	mass = get_target_mass(level)
@@ -304,3 +309,10 @@ func pop():
 	pitch = 1.0 + (5 - level) * 0.1
 	volume = (level - 8) * 1.0
 	audio.play_audio(sample, pitch - randf() * 0.01, volume - randf() * 2 - 5)
+	
+func shake():
+	var random_force = Vector2(randf_range(-500, 500), randf_range(-500, 500))  # 隨機方向
+	var random_torque = randf_range(-300, 300)  # 旋轉晃動
+
+	apply_impulse(random_force)  # 施加隨機衝量
+	apply_torque_impulse(random_torque)  # 施加旋轉力

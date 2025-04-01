@@ -364,4 +364,15 @@ func do_ending(delta: float):
 	screenshot_anim.play("screenshot")
 
 
-	
+
+
+func _on_shake_button_pressed() -> void:
+	pass # Replace with function body.
+	for fruit in get_tree().get_nodes_in_group("fruits"):  # 遍歷所有水果
+		fruit.shake()  # 讓每個水果執行 shake()
+
+
+func _on_ShakeButton_pressed():
+	pass  # 這裡要寫搖晃邏輯
+	for fruit in get_tree().get_nodes_in_group("fruits"):  # 遍歷所有水果
+		fruit.shake()  # 讓每個水果執行 shake()	
