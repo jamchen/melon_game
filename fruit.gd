@@ -45,6 +45,8 @@ const baked_colors := [
 # 	preload("res://fruit_textures/watermelon.png"), # level 11
 # ]
 
+
+
 const fruit_textures := [
 	preload("res://fruit_textures/01.png"), # level 1 (cherry)
 	preload("res://fruit_textures/02.png"), # level 2 (strawberry)
@@ -77,10 +79,16 @@ static func get_target_scale(level_: int) -> float:
 		][level_ - 1] * 1.42
 
 static func get_color(level_: int) -> Color:
-	return baked_colors[level_ - 1]
+	return baked_colors[clamp(level_ - 1, 0, baked_colors.size() - 1)]
+	
+
 
 static func get_target_mass(level_: int) -> float:
-	return pow(get_target_scale(level_), 2.0)
+	#return pow(get_target_scale(level_), 2.0)
+	var index = clamp(level_ - 1, 0, 10) # 0 ~ 10 之間
+	return [
+		1, 1.5, 2.1, 2.4, 3, 3.6, 3.8, 5.3, 6.1, 8.5, 10
+	][index] * 1.42
 
 func _ready():
 	#if false and colors != baked_colors:
@@ -106,8 +114,9 @@ func update_fruit_appearance():
 		sprite.texture = fruit_textures[texture_index]
 		
 		# 根據碰撞形狀大小和紋理大小動態計算scale
-		if sprite.texture:
+		if sprite and sprite.texture:
 			var texture_size = sprite.texture.get_size()
+			
 			
 			# 將基礎碰撞半徑設為10.0，與MeshInstance2D的scale一致
 			var base_collision_radius = 10.0
@@ -124,6 +133,8 @@ func update_fruit_appearance():
 			
 			# 設置sprite的scale
 			sprite.scale = Vector2(scale_factor, scale_factor)
+			
+
 	
 	if mesh:
 		# Keep old coloring system as fallback
@@ -195,12 +206,21 @@ func _process(delta: float):
 func do_combining(delta: float):
 	if game_over:
 		return
+	
 
 	if cooldown > delta:
 		cooldown -= delta
 		return
 	else:
 		cooldown = 0
+	
+	var colliding_bodies = get_colliding_bodies()
+	if not colliding_bodies:  # 避免 null 錯誤
+		return
+		
+	for node in colliding_bodies:
+		if not node or not node.has_method("get_absorbed"):
+			continue
 
 	for node in get_colliding_bodies():
 		if not node.has_method("get_absorbed") or node.level != level or node.is_queued_for_deletion():
@@ -250,6 +270,9 @@ func _scale_2d(target_scale: Vector2):
 	if target_scale.x == 1:
 		return
 		
+	if target_scale.x == 0 or target_scale.y == 0:
+		return  # 避免除以零
+		
 	# 標記sprite已被處理，避免update_fruit_appearance重複處理
 	var sprite_already_updated = false
 	
@@ -281,4 +304,3 @@ func pop():
 	pitch = 1.0 + (5 - level) * 0.1
 	volume = (level - 8) * 1.0
 	audio.play_audio(sample, pitch - randf() * 0.01, volume - randf() * 2 - 5)
-	
