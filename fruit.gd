@@ -1,6 +1,9 @@
 extends RigidBody2D
 class_name Fruit
 
+
+
+
 @export var level := 1
 var current_scale := Vector2(1, 1)
 var cooldown := 0.1
@@ -55,6 +58,8 @@ const fruit_textures := [
 	preload("res://fruit_textures/10.png"), # level 10 (melon)
 	preload("res://fruit_textures/11.png"), # level 11 (watermelon)
 ]
+
+
 
 static func get_target_scale(level_: int) -> float:
 	return [
@@ -264,6 +269,9 @@ func _scale_2d(target_scale: Vector2):
 	if not sprite_already_updated:
 		update_fruit_appearance()
 
+
+
+
 func pop():
 	popped = true
 	var audio: Audio = $"../audio"
@@ -273,3 +281,4 @@ func pop():
 	pitch = 1.0 + (5 - level) * 0.1
 	volume = (level - 8) * 1.0
 	audio.play_audio(sample, pitch - randf() * 0.01, volume - randf() * 2 - 5)
+	

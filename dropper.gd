@@ -57,12 +57,25 @@ const fruit_textures := [
 	preload("res://fruit_textures/11.png"), # level 11 (watermelon)
 ]
 
+
+
 func _ready():
+	
+	print_debug("cursor:", cursor)
+	print_debug("score:", score)
+	print_debug("future_fruit:", future_fruit)
+	print_debug("Fruit 類別:", Fruit)
+	
 	fruit_rng.set_seed(7) # Chosen with a fair dice roll (also the sequence starts with two small fruits)
 	score.level_start()
 	
+	
+	
+	
 	# Set up the future fruit preview
 	future_fruit = cursor.duplicate()
+	
+
 
 	add_child(future_fruit)
 	move_child(future_fruit, 0)
@@ -177,7 +190,12 @@ func make_fruit():
 	score.end_combo()
 	var fruit = prefab.instantiate()
 	fruit.level = level
-	$"..".add_child(fruit)
+	#$"..".add_child(fruit)
+	if get_parent() != null:
+		get_parent().add_child(fruit)
+	else:
+		print_debug("Dropper 沒有父節點，無法新增 fruit")
+		
 	fruit.global_position.y = cursor.global_position.y
 	var border_dist := border_const - Fruit.get_target_scale(level) * original_size.x
 	fruit.global_position.x = clamp(target_x, -border_dist, border_dist)
@@ -208,17 +226,22 @@ func _physics_process(delta: float):
 	
 	#var target_scale := original_size * Fruit.get_target_scale(level)
 	var scale_factor = 1.0
-	if "get_target_scale" in Fruit:
-		scale_factor = Fruit.get_target_scale(level)
-	else:
-		push_error("Fruit 類別內找不到 get_target_scale 方法");
+	#if "get_target_scale" in Fruit:
+		#scale_factor = Fruit.get_target_scale(level)
+	#else:
+		#push_error("Fruit 類別內找不到 get_target_scale 方法");
+	if not Engine.has_singleton("Fruit"):
+		print_debug("Fruit 類別不存在！請確認 Fruit.gd 是否正確載入")
+	elif not "get_target_scale" in Fruit:
+		print_debug("Fruit 類別沒有 get_target_scale 方法！")
+
 	var target_scale := original_size * Fruit.get_target_scale(level)
 
 	
 	
 	cursor.scale = lerp(cursor.scale, target_scale, t)
 	var border_dist := border_const - cursor.scale.x
-
+	
 	if not drop_queued:
 		target_x = clamp(get_local_mouse_position().x, -border_dist, border_dist)
 
@@ -339,3 +362,6 @@ func do_ending(delta: float):
 			return
 	ending_over = true
 	screenshot_anim.play("screenshot")
+
+
+	
