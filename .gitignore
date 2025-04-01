@@ -4,3 +4,24 @@
 /.mono
 
 .firebase/
+# Godot export templates
+*.pck
+*.wasm
+*.zip
+
+# Build directories
+build/
+export/
+dist/
+
+# System/tool-specific ignores
+.DS_Store
+Thumbs.db
+.directory
+*~
+
+# Godot-specific ignores
+.godot/
+*.uid
+*.import
+.import
