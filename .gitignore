@@ -2,3 +2,5 @@
 .godot/
 /.import
 /.mono
+
+.firebase/
