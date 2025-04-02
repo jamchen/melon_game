@@ -69,6 +69,9 @@ func _ready():
 	fruit_rng.set_seed(7) # Chosen with a fair dice roll (also the sequence starts with two small fruits)
 	score.level_start()
 	
+
+	
+
 	
 	
 	
@@ -362,6 +365,3 @@ func do_ending(delta: float):
 			return
 	ending_over = true
 	screenshot_anim.play("screenshot")
-
-
-	

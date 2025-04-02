@@ -10,15 +10,20 @@ config_version=5
 
 [application]
 
-config/name="我要看到阿北！"
-run/main_scene="res://main.tscn"
+config/name="一起眾頭獎"
+config/description="遊戲啦"
+run/main_scene="uid://cln1wov33m0k2"
 config/features=PackedStringArray("4.4")
 run/max_fps=60
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://icon.png"
-config/build_datetime="2025-04-02T11:59:20"
+config/build_datetime="2025-04-02T22:55:17"
+
+[audio]
+
+buses/description=""
 
 [autoload]
 

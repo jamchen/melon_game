@@ -36,3 +36,7 @@ func play_audio(sample: AudioStream, pitch : float, volume : float):
 	new_stream.pitch_scale = pitch
 	new_stream.volume_db = volume
 	new_stream.play()
+
+
+func _on_button_pressed() -> void:
+	pass # Replace with function body.

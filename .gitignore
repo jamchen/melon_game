@@ -9,11 +9,6 @@
 *.wasm
 *.zip
 
-# Build directories
-build/
-export/
-dist/
-
 # System/tool-specific ignores
 .DS_Store
 Thumbs.db

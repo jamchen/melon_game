@@ -15,6 +15,8 @@ func level_start():
 	text = ""
 	score = 0
 	is_game_over = false
+	
+
 
 func end_combo():
 	combo_counter = 1
