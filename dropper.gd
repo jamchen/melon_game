@@ -268,10 +268,10 @@ func _physics_process(delta: float):
 		#scale_factor = Fruit.get_target_scale(level)
 	#else:
 		#push_error("Fruit 類別內找不到 get_target_scale 方法");
-	if not Engine.has_singleton("Fruit"):
-		print_debug("Fruit 類別不存在！請確認 Fruit.gd 是否正確載入")
-	elif not "get_target_scale" in Fruit:
-		print_debug("Fruit 類別沒有 get_target_scale 方法！")
+	#if not Engine.has_singleton("Fruit"):
+		#print_debug("Fruit 類別不存在！請確認 Fruit.gd 是否正確載入")
+	#elif not "get_target_scale" in Fruit:
+		#print_debug("Fruit 類別沒有 get_target_scale 方法！")
 
 	var target_scale := original_size * Fruit.get_target_scale(level)
 	
