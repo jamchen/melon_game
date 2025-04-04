@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cln1wov33m0k2"]
+[gd_scene load_steps=15 format=3 uid="uid://cln1wov33m0k2"]
 
 [ext_resource type="PackedScene" uid="uid://bpqxa5bkg6dw5" path="res://wall.tscn" id="1"]
 [ext_resource type="Script" uid="uid://c1gfvvwot7dpr" path="res://game.gd" id="1_kek77"]
 [ext_resource type="PackedScene" uid="uid://fjpy2fl1iguo" path="res://kill_plane.tscn" id="2"]
+[ext_resource type="FontFile" uid="uid://dwvuapqtiajaf" path="res://themes/STHeiti Light.ttc" id="2_dg77c"]
 [ext_resource type="Script" uid="uid://b5vgbb854isme" path="res://music-btn.gd" id="2_efxa6"]
 [ext_resource type="Script" uid="uid://cx16tkx1fkad6" path="res://dropper.gd" id="3"]
 [ext_resource type="Script" uid="uid://cpeyu6mh84do0" path="res://audio.gd" id="4"]
@@ -28,6 +29,7 @@ offset_left = 155.0
 offset_top = -330.0
 offset_right = 227.0
 offset_bottom = -299.0
+theme_override_fonts/font = ExtResource("2_dg77c")
 text = "播放音樂"
 script = ExtResource("2_efxa6")
 
