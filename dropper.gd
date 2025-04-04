@@ -61,6 +61,41 @@ const fruit_textures := [
 
 func _ready():
 	
+	#0403修改
+	print_debug("cursor:", cursor)
+	print_debug("score:", score)
+
+	# 確保 cursor 存在
+	if cursor == null:
+		print_debug("Warning: cursor is null, check scene structure!")
+		return
+
+	# 確保 score 存在
+	if score == null:
+		print_debug("Warning: score is null, check scene structure!")
+		return
+
+	# 初始化隨機數種子
+	fruit_rng.set_seed(7)  
+	score.level_start()
+
+	# 設置 future_fruit，避免 cursor 為 null 時錯誤
+	if cursor != null:
+		future_fruit = cursor.duplicate()
+		add_child(future_fruit)
+		move_child(future_fruit, 0)
+		future_fruit.name = "FUTURE"
+		future_fruit.global_position = Vector2(-208, -280)
+
+		cursor_y = cursor.position.y
+		cursor.global_position = future_fruit.global_position
+
+		# 設置當前水果的外觀
+		update_cursor_appearance()
+		update_future_fruit_appearance()
+		
+		#0403修改end
+	
 	print_debug("cursor:", cursor)
 	print_debug("score:", score)
 	print_debug("future_fruit:", future_fruit)
@@ -239,8 +274,10 @@ func _physics_process(delta: float):
 		print_debug("Fruit 類別沒有 get_target_scale 方法！")
 
 	var target_scale := original_size * Fruit.get_target_scale(level)
+	
 
 	
+
 	
 	cursor.scale = lerp(cursor.scale, target_scale, t)
 	var border_dist := border_const - cursor.scale.x
